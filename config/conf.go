@@ -60,5 +60,4 @@ func InitConfig() {
 	if e != nil {
 		log.Logger.Info("fail to unmarshal, e=%v", zap.Any("error", e))
 	}
-	log.Logger.Info("config init success, config=%v", zap.Any("config", AllConfig))
 }
