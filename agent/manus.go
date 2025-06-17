@@ -1,22 +1,22 @@
 // Package agent
 /**
-@author: xudongliu.666@bytedance.com
-@desc:
+@author: xdl2003
+@desc: manus agent
 @date: 2025/6/5
 **/
 package agent
 
 type Manus struct {
-	*ReActAgent
+	*ToolCallAgent
 }
 
 func NewManus() (*Manus, error) {
-	agent, err := NewReActAgent()
+	agent, err := NewToolCallAgent()
 	if err != nil {
 		return nil, err
 	}
 	manus := &Manus{
-		ReActAgent: agent,
+		ToolCallAgent: agent,
 	}
 	return manus, nil
 }

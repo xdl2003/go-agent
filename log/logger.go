@@ -1,7 +1,7 @@
 // Package log
 /**
-@author: xudongliu.666@bytedance.com
-@desc:
+@author: xdl2003
+@desc: 日志模块
 @date: 2025/6/5
 **/
 package log

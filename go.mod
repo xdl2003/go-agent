@@ -4,6 +4,8 @@ go 1.24.3
 
 require (
 	github.com/json-iterator/go v1.1.12
+	github.com/pkg/errors v0.9.1
+	github.com/sashabaranov/go-openai v1.40.1
 	github.com/spf13/viper v1.20.1
 	github.com/volcengine/volcengine-go-sdk v1.1.13
 	go.uber.org/zap v1.27.0

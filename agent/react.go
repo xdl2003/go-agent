@@ -1,7 +1,7 @@
 // Package agent
 /**
-@author: xudongliu.666@bytedance.com
-@desc:
+@author: xdl2003
+@desc: 基础的交互agent
 @date: 2025/6/5
 **/
 package agent
@@ -10,6 +10,7 @@ import (
 	"go-manus/go-manus/config"
 	"go-manus/go-manus/llm"
 	"go-manus/go-manus/log"
+	"go-manus/go-manus/model"
 	"go.uber.org/zap"
 	"sync"
 )
@@ -20,17 +21,12 @@ type ReActAgent struct {
 	SystemPrompt   string
 	NextStepPrompt string
 	LLM            *llm.Client
-	// Memory             *schema.Memory
+	Memory         *model.Memory
 	// State              schema.AgentState
 	MaxSteps           int
 	CurrentStep        int
 	DuplicateThreshold int
 	mu                 sync.RWMutex
-
-	// AvailableTools     map[string]tool.ToolIF
-	// ToolChoices        tool.ToolChoiceType
-	SpecialToolNames []string
-	// ToolCalls          []*schema.ToolCall
 	CurrentBase64Image string
 	MaxObserve         int
 }
@@ -43,5 +39,9 @@ func NewReActAgent() (*ReActAgent, error) {
 		return nil, err
 	}
 	agent.LLM = client
+	agent.NextStepPrompt = model.GetNextStepPrompt()
+	agent.SystemPrompt = model.GetSystemPrompt()
+	agent.MaxSteps = 100
+	agent.Memory = model.NewMemory()
 	return agent, nil
 }
