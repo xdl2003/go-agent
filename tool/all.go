@@ -11,6 +11,6 @@ import "go-manus/go-manus/model"
 func GetAvailableTools() map[string]model.BaseTool {
 	return map[string]model.BaseTool{
 		"terminate": NewTerminateTool(),
-		"plan":      NewPlanTool(),
+		// "plan":      NewPlanTool(),
 	}
 }

@@ -153,3 +153,22 @@ func (c *Client) AskTool(req *AskRequest) *ChatResp {
 	}
 	return resp
 }
+
+func (c *Client) Ask(req *AskRequest) *ChatResp {
+	log.Logger.Info("ask, req=%v", zap.Any("req", req))
+	doubaoReq := doubao_m.CreateChatCompletionRequest{
+		Messages:   ConvertMessagesToDoubaoMessages(req.Messages),
+		Tools:      convertTool2Doubao(req.Tools),
+		Model:      "doubao-1.5-pro-32k-250115",
+		ToolChoice: doubao_m.ToolChoiceStringTypeAuto,
+	}
+	completion, err := c.DoubaoClient.CreateChatCompletion(context.Background(), doubaoReq)
+	resp := &ChatResp{}
+	if err != nil {
+		log.Logger.Error("fail to ask, err=%v", zap.Error(err))
+		resp.Error = err
+	} else {
+		resp.Message = ConvertDoubaoMessageToMessage(&completion.Choices[0].Message)
+	}
+	return resp
+}

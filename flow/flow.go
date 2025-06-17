@@ -78,6 +78,7 @@ func (f *Flow) Execute(prompt *string) (string, error) {
 				return "", err
 			}
 			result += finalResult
+			fmt.Println("task completed: ", finalResult)
 			break
 		}
 
@@ -158,24 +159,23 @@ func (f *Flow) getCurrentStepInfo() (int, *model.Step, error) {
 
 // finalizePlan 完成计划并提供总结
 func (f *Flow) finalizePlan() (string, error) {
-	//planText, err := f.getPlanText()
-	//if err != nil {
-	//	return "", err
-	//}
-	//
-	//systemMessage := schema.NewSystemMessage(prompt.PlannerFinalSystem)
-	//userMessage := schema.NewUserMessage(fmt.Sprintf(prompt.PlanFinalUser, planText), "")
-	//
-	//chatReq := &llm.ChatRequest{
-	//	Messages: []*schema.Message{systemMessage, userMessage},
-	//}
-	//chatResp := f.PlanLlm.Chat(ctx, chatReq)
-	//if chatResp.Error != nil {
-	//	return "", fmt.Errorf("plan completed. Error generating summary")
-	//}
-	//
-	//return fmt.Sprintf("Plan completed:\n\n%s", chatResp.Message.Content), nil
-	return "plan completed", nil
+	planText, err := f.getPlanText()
+	if err != nil {
+		return "", err
+	}
+
+	systemMessage := model.NewSystemMessage(model.GetFinalizeSystemPrompt())
+	userMessage := model.NewUserMessage(model.GetFinalizeUserPrompt(&planText), "")
+
+	chatReq := &llm.AskRequest{
+		Messages: []*model.Message{systemMessage, userMessage},
+	}
+	chatResp := f.llm.Ask(chatReq)
+	if chatResp.Error != nil {
+		return "", fmt.Errorf("plan completed. Error generating summary")
+	}
+
+	return fmt.Sprintf("Plan completed:\n\n%s", chatResp.Message.Content), nil
 }
 
 // getPlanText 获取当前计划的格式化文本
@@ -209,9 +209,12 @@ func (f *Flow) CreateInitialPlan(prompt *string) error {
 	log.Logger.Info("create initial plan, resp=%v", zap.Any("resp", chatResp))
 	for _, toolCall := range chatResp.Message.ToolCalls {
 		if toolCall.Function.Name == f.PlanTool.GetTool().Function.Name {
-			resp, err := f.PlanTool.Execute(toolCall.Function.Arguments)
-			fmt.Println("create initial plan, rep=", resp, "err=", err)
-			fmt.Println("plan=", util.MustJson(f.PlanTool.GetAllPlans()))
+			_, err := f.PlanTool.Execute(toolCall.Function.Arguments)
+			//fmt.Println("create initial plan, rep=", resp, "err=", err)
+			//fmt.Println("plan=", util.MustJson(f.PlanTool.GetAllPlans()))
+			if err != nil {
+				return err
+			}
 			for plan, _ := range f.PlanTool.GetAllPlans() {
 				f.PlanTool.SetActive(plan)
 				break

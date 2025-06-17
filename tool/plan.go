@@ -43,12 +43,12 @@ func NewPlanTool() *PlanTool {
 	}
 }
 
-func (p *PlanTool) GetTool() *model.Tool {
-	return p.Tool
+func (pt *PlanTool) GetTool() *model.Tool {
+	return pt.Tool
 }
 
-func (p *PlanTool) Execute(input string) (string, error) {
-	fmt.Println("调用工具PlanTool, input=", input)
+func (pt *PlanTool) Execute(input string) (string, error) {
+	// fmt.Println("调用工具PlanTool, input=", input)
 	var command model.PlanCommand
 	err := jsoniter.UnmarshalFromString(input, &command)
 	if err != nil {
@@ -61,19 +61,19 @@ func (p *PlanTool) Execute(input string) (string, error) {
 	}
 	switch command.Command {
 	case "create":
-		return p.CreatePlan(command)
+		return pt.CreatePlan(command)
 	case "update":
-		return p.UpdatePlan(command)
+		return pt.UpdatePlan(command)
 	case "list":
-		return p.List()
+		return pt.List()
 	case "get":
-		return p.Get(command.PlanID)
+		return pt.Get(command.PlanID)
 	case "set_active":
-		return p.SetActive(command.PlanID)
+		return pt.SetActive(command.PlanID)
 	case "mark_step":
-		return p.MarkStep(command.PlanID, command.StepIndex, command.StepStatus, command.StepNotes)
+		return pt.MarkStep(command.PlanID, command.StepIndex, command.StepStatus, command.StepNotes)
 	case "delete":
-		return p.DeletePlan(command.PlanID)
+		return pt.DeletePlan(command.PlanID)
 	default:
 		return "", errors.New(fmt.Sprintf("Invalid command: %s", command.Command))
 	}

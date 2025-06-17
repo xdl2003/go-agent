@@ -8,6 +8,10 @@ package model
 
 import "strconv"
 
+/*****************************
+ *  计划相关
+ *****************************/
+
 func GetPlanSystemPrompt() string {
 	return "You are a planning assistant. Create a concise, actionable plan with clear steps. " +
 		"Focus on key milestones rather than detailed sub-steps. " +
@@ -17,6 +21,10 @@ func GetPlanSystemPrompt() string {
 func GetPlanUserPrompt(req *string) string {
 	return "Create a reasonable plan with clear steps to accomplish the task: " + *req
 }
+
+/*****************************
+ *  执行相关
+ *****************************/
 
 func GetStepPrompt(planStatus string, currentStepIndex int64, stepText string) string {
 	return "CURRENT PLAN STATUS:\n        " +
@@ -35,9 +43,27 @@ func GetNextStepPrompt() string {
 		"If you want to stop the interaction at any point, use the `terminate` tool/function call."
 }
 
+/*****************************
+ *  manus相关
+ *****************************/
+
 func GetSystemPrompt() string {
 	return "You are Manus, an all-capable AI assistant, aimed at solving any task presented by the user. " +
 		"You have various tools at your disposal that you can call upon to efficiently complete complex requests. " +
 		"Whether it's programming, information retrieval, file processing, web browsing, or human interaction (only for extreme cases), you can handle it all.\"" +
 		"\n    \"The initial directory is: {directory}\""
+}
+
+/*****************************
+ *  finalize相关
+ *****************************/
+
+func GetFinalizeSystemPrompt() string {
+	return "You are a planning assistant. Your task is to summarize the completed plan."
+}
+
+func GetFinalizeUserPrompt(planText *string) string {
+	return "The plan has been completed. Here is the final plan status:\\n\\n" +
+		*planText +
+		"\\n\\nPlease provide a summary of what was accomplished and any final thoughts."
 }

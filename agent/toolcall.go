@@ -54,7 +54,7 @@ func (tc *ToolCallAgent) GetName() string {
 }
 
 func (tc *ToolCallAgent) Run(request string) (string, error) {
-	fmt.Println("调用Manus, request=", request)
+	// fmt.Println("调用Manus, request=", request)
 	tc.mu.RLock()
 	if tc.State != model.AgentStateIDLE {
 		tc.mu.RUnlock()
@@ -62,11 +62,9 @@ func (tc *ToolCallAgent) Run(request string) (string, error) {
 	}
 	tc.mu.RUnlock()
 
-	//if request != "" {
-	//	if err := a.UpdateMemory(schema.RoleUser, request, "", "", nil, "", ""); err != nil {
-	//		return "", fmt.Errorf("failed to update memory: %w", err)
-	//	}
-	//}
+	if request != "" {
+		tc.Memory.AddMessage(model.NewUserMessage(request, ""))
+	}
 	tc.State = model.AgentStateRUNNING
 	defer func() {
 		tc.State = model.AgentStateIDLE
@@ -139,13 +137,10 @@ func (tc *ToolCallAgent) Think() (bool, error) {
 		systemMsgs = []*model.Message{model.NewSystemMessage(tc.SystemPrompt)}
 	}
 
-	userMessage := model.NewUserMessage(tc.NextStepPrompt, "")
-
 	request := &llm.AskRequest{}
 	request.Messages = []*model.Message{}
 	request.Messages = append(request.Messages, messages...)
 	request.Messages = append(request.Messages, systemMsgs...)
-	request.Messages = append(request.Messages, userMessage)
 
 	request.Tools = []*model.Tool{}
 	for _, tool := range tc.AvailableTools {
