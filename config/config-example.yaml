@@ -1,0 +1,18 @@
+PrimaryConfig:
+  ModelSource: doubao
+  ModelName: chatglm_pro
+  ApiKey: "your_primary_api_key"
+
+ExecutorConfig:
+  ModelSource: doubao
+  ModelName: chatglm_pro
+  ApiKey: "your_executor_api_key"
+
+AllMcpConfig:
+  type: stdio
+  command: npx
+  env:
+    - EXA_API_KEY="your_exa_api_key"
+  args:
+    - exa-mcp-server
+    - --tools=web_search_exa,file_system

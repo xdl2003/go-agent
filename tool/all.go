@@ -7,6 +7,7 @@
 package tool
 
 import (
+	"go-manus/go-manus/mcp"
 	"go-manus/go-manus/model"
 )
 
@@ -15,9 +16,8 @@ func GetAvailableTools() map[string]model.BaseTool {
 		"terminate": NewTerminateTool(),
 		// "plan":      NewPlanTool(),
 	}
-	tools, _ := model.GetToolList()
-	for _, tool := range tools {
-		result[tool.Function.Name] = tool
+	for _, tool := range mcp.AllTools {
+		result[tool.Name] = model.MCPTool2Tool(tool)
 	}
 	return result
 }

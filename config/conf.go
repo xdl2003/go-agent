@@ -28,6 +28,8 @@ type Settings struct {
 	//  ExecutorConfig
 	//  @Description: 执行模型配置
 	ExecutorConfig *ModelConfig `yaml:"executor_config"`
+
+	AllMcpConfig []*MCPConfig `yaml:"all_mcp_config"`
 }
 
 // ModelConfig
@@ -37,6 +39,14 @@ type ModelConfig struct {
 	ModelSource string `yaml:"model_source"`
 	ModelName   string `yaml:"model_name"`
 	ApiKey      string `yaml:"api_key"`
+}
+
+type MCPConfig struct {
+	Type    string   `yaml:"type"`
+	Command string   `yaml:"command"`
+	Env     []string `yaml:"env"`
+	Args    []string `yaml:"args"`
+	BaseUrl string   `yaml:"base_url"`
 }
 
 // InitConfig

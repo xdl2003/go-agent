@@ -7,7 +7,6 @@
 package model
 
 import (
-	"context"
 	"github.com/mark3labs/mcp-go/mcp"
 	mcp2 "go-manus/go-manus/mcp"
 )
@@ -22,18 +21,6 @@ func MCPTool2Tool(mcpTool *mcp.Tool) *Tool {
 		},
 	}
 	return &tool
-}
-
-func GetToolList() ([]*Tool, error) {
-	tools, err := mcp2.McpClient.ListTools(context.Background(), mcp.ListToolsRequest{})
-	if err != nil {
-		return nil, err
-	}
-	var result []*Tool
-	for _, tool := range tools.Tools {
-		result = append(result, MCPTool2Tool(&tool))
-	}
-	return result, nil
 }
 
 type Tool struct {

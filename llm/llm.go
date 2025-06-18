@@ -159,7 +159,7 @@ func (c *Client) Ask(req *AskRequest) *ChatResp {
 	doubaoReq := doubao_m.CreateChatCompletionRequest{
 		Messages:   ConvertMessagesToDoubaoMessages(req.Messages),
 		Tools:      convertTool2Doubao(req.Tools),
-		Model:      "doubao-1.5-pro-32k-250115",
+		Model:      "doubao-seed-1-6-250615",
 		ToolChoice: doubao_m.ToolChoiceStringTypeAuto,
 	}
 	completion, err := c.DoubaoClient.CreateChatCompletion(context.Background(), doubaoReq)
