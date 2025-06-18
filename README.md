@@ -27,7 +27,7 @@ Similar to `PrimaryConfig`, used for the executor's model configuration.
 
 **Important**: The Agent requires `webSearch` and `FileSystem` MCP plugins to function properly. We strongly recommend using the following plugins:
 - [FileSystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
-- [webSearch MCP](https://github.com/exa - labs/exa - mcp - server)
+- [webSearch MCP](https://github.com/exa-labs/exa-mcp-server)
 
 ### Example Configuration
 Refer to `config/config - example.yaml` for an example configuration.
