@@ -1,4 +1,5 @@
 # go-manus
+<mark style="background - color: yellow;">中文文档-------[README-cn.md](https://github.com/xdl2003/go-agent/blob/main/README-cn.md)--------</mark>
 
 A multi - agent self - planning system written in Go, adapted from [OpenManus](https://github.com/mannaandpoem/OpenManus/). It incorporates MCP (Model Context Protocol) configuration capabilities similar to Claude, allowing users to freely integrate third - party MCPs.
 
@@ -30,6 +31,3 @@ Similar to `PrimaryConfig`, used for the executor's model configuration.
 
 ### Example Configuration
 Refer to `config/config - example.yaml` for an example configuration.
-
-## Chinese Documentation
-For Chinese documentation, please refer to [README - cn.md](README - cn.md).
