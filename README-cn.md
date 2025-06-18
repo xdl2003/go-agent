@@ -2,6 +2,9 @@
 
 基于 [OpenManus](https://github.com/mannaandpoem/OpenManus/) 改造的Go语言多智能体自规划系统，引入了类似Claude的MCP（模型上下文协议）配置能力，可自由接入第三方MCP。
 
+## 示例
+![img.png](img.png)
+
 ## 功能特性
 1. 多智能体自规划
 2. MCP配置能力

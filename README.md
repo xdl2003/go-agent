@@ -3,6 +3,9 @@
 
 A multi - agent self - planning system written in Go, adapted from [OpenManus](https://github.com/mannaandpoem/OpenManus/). It incorporates MCP (Model Context Protocol) configuration capabilities similar to Claude, allowing users to freely integrate third - party MCPs.
 
+## Examples
+![img.png](img.png)
+
 ## Features
 1. Multi - agent self - planning
 2. MCP configuration capabilities
