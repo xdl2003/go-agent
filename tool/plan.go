@@ -47,7 +47,7 @@ func (pt *PlanTool) GetTool() *model.Tool {
 	return pt.Tool
 }
 
-func (pt *PlanTool) Execute(input string) (string, error) {
+func (pt *PlanTool) Execute(input string, method string) (string, error) {
 	// fmt.Println("调用工具PlanTool, input=", input)
 	var command model.PlanCommand
 	err := jsoniter.UnmarshalFromString(input, &command)

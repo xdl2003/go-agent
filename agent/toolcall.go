@@ -24,8 +24,6 @@ type ToolCallAgentIF interface {
 
 type ToolCallAgent struct {
 	*ReActAgent
-	// AvailableTools     map[string]tool.ToolIF
-	// ToolChoices        tool.ToolChoiceType
 	ToolCalls        []*model.ToolCall
 	AvailableTools   map[string]model.BaseTool
 	SpecialToolNames []string
@@ -84,7 +82,7 @@ func (tc *ToolCallAgent) Run(request string) (string, error) {
 		currentStep := tc.CurrentStep
 		maxSteps := tc.MaxSteps
 		tc.mu.Unlock()
-		fmt.Println("Excuting step %d/%d", currentStep, maxSteps)
+		fmt.Println("Executing step", currentStep, "of", maxSteps)
 
 		// 执行步骤（由子类实现）
 		stepResult, err := tc.Step()
@@ -229,7 +227,7 @@ func (tc *ToolCallAgent) executeTool(command *model.ToolCall) (string, error) {
 		return fmt.Sprintf("Error: Unknown tool '%s'", command.Function.Name), nil
 	}
 	// 执行工具
-	result, err := tc.AvailableTools[command.Function.Name].Execute(command.Function.Arguments)
+	result, err := tc.AvailableTools[command.Function.Name].Execute(command.Function.Arguments, command.Function.Name)
 	if err != nil {
 		errorMsg := fmt.Sprintf("⚠️ Tool '%s' encountered a problem: %v", command.Function.Name, err)
 		return fmt.Sprintf("Error: %s", errorMsg), nil

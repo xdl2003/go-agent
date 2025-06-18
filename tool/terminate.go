@@ -35,7 +35,7 @@ func (t *TerminateTool) GetTool() *model.Tool {
 	return t.Tool
 }
 
-func (t *TerminateTool) Execute(input string) (string, error) {
+func (t *TerminateTool) Execute(input string, method string) (string, error) {
 	terminateInput := model.TerminateInput{}
 	err := json.Unmarshal([]byte(input), &terminateInput)
 	if err != nil {

@@ -130,7 +130,7 @@ func (f *Flow) markStepCompleted(currentStepIndex int64) error {
 		StepStatus: string(model.Completed),
 		StepNotes:  "",
 	}
-	result, err := f.PlanTool.Execute(util.MustJson(command))
+	result, err := f.PlanTool.Execute(util.MustJson(command), "")
 	if err != nil {
 		return err
 	}
@@ -184,7 +184,7 @@ func (f *Flow) getPlanText() (string, error) {
 		Command: string(model.PlanCommandTypeGet),
 		PlanID:  f.PlanTool.CurrentPlanID,
 	}
-	result, err := f.PlanTool.Execute(util.MustJson(command))
+	result, err := f.PlanTool.Execute(util.MustJson(command), "")
 	if err != nil {
 		return "", err
 	}
@@ -209,7 +209,7 @@ func (f *Flow) CreateInitialPlan(prompt *string) error {
 	log.Logger.Info("create initial plan, resp=%v", zap.Any("resp", chatResp))
 	for _, toolCall := range chatResp.Message.ToolCalls {
 		if toolCall.Function.Name == f.PlanTool.GetTool().Function.Name {
-			_, err := f.PlanTool.Execute(toolCall.Function.Arguments)
+			_, err := f.PlanTool.Execute(toolCall.Function.Arguments, "")
 			//fmt.Println("create initial plan, rep=", resp, "err=", err)
 			//fmt.Println("plan=", util.MustJson(f.PlanTool.GetAllPlans()))
 			if err != nil {
