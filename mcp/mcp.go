@@ -45,7 +45,8 @@ func InitMcp() {
 		mcpClient := client.NewClient(trans)
 		err := mcpClient.Start(context.Background())
 		if err != nil {
-			panic(err)
+			log.Logger.Error("fail to start mcp client", zap.Error(err))
+			continue
 		}
 		mcpClient.OnNotification(func(notification mcp.JSONRPCNotification) {})
 		_, err = mcpClient.Initialize(context.Background(), mcp.InitializeRequest{})

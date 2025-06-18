@@ -9,10 +9,17 @@ ExecutorConfig:
   ApiKey: "your_executor_api_key"
 
 AllMcpConfig:
-  type: stdio
-  command: npx
-  env:
-    - EXA_API_KEY="your_exa_api_key"
-  args:
-    - exa-mcp-server
-    - --tools=web_search_exa,file_system
+  - type: stdio
+    command: npx
+    env:
+      - EXA_API_KEY="your_exa_api_key"
+    args:
+      - exa-mcp-server
+      - --tools=web_search_exa,file_system
+
+  - type: stdio
+    command: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-filesystem"
+      - your/workspace/path
