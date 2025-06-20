@@ -15,7 +15,7 @@ func main() {
 	log.Logger.Info("/go-manus start/\n")
 	config.InitConfig()
 	mcp.InitMcp()
-	prompt := "你是一个AI产品经理，请生成一篇对于devin工具的调研报告"
+	prompt := "使用工具生成关于广告系统的知识图谱，你有create_entities,create_relations, add_observations等工具来构建知识图谱，你已经完成了一些调研在workspace中"
 	flow := flow.NewFlow()
 	_, err := flow.Execute(&prompt)
 	if err != nil {

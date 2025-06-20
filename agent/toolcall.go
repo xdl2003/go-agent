@@ -185,7 +185,7 @@ func (tc *ToolCallAgent) Act() (string, error) {
 		if tc.MaxObserve > 0 && len(result) > tc.MaxObserve {
 			result = result[:tc.MaxObserve]
 		}
-		fmt.Printf("🎯 Tool '%s' completed its mission! Result: %s\n", command.Function.Name, result)
+		fmt.Printf("🎯 Tool '%s' completed its mission! Result: %s\n", command.Function.Name, result[:min(100, len(result))])
 
 		// 将工具响应添加到内存
 		toolMsg := model.NewToolMessage(result, command.ID, command.Function.Name, tc.CurrentBase64Image)

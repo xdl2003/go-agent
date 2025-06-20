@@ -64,3 +64,7 @@ type FunctionCall struct {
 	Name      string `json:"name,omitempty"`
 	Arguments string `json:"arguments,omitempty"`
 }
+
+type AskHumanInput struct {
+	Inquire string `json:"inquire" description:"The question you want to ask human."`
+}

@@ -28,9 +28,10 @@ Similar to `PrimaryConfig`, used for the executor's model configuration.
 - `env`: Environment variables, such as API keys.
 - `args`: Command - line arguments for starting the MCP server.
 
-**Important**: The Agent requires `webSearch` and `FileSystem` MCP plugins to function properly. We strongly recommend using the following plugins:
-- [FileSystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
-- [webSearch MCP](https://github.com/exa-labs/exa-mcp-server)
+**Important**: The Agent requires at least `webSearch` and `FileSystem` MCP plugins to function properly. We strongly recommend using the following plugins:
+- [FileSystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) : with that mcp your agent can create and edit file on your local machine.
+- [webSearch MCP](https://github.com/exa-labs/exa-mcp-server) : with that mcp your agent can get anything needed on the Internet.
+- [playwright MCP](https://github.com/microsoft/playwright-mcp) : with that mcp your agent can operate your own browser.
 
 ### Example Configuration
 Refer to `config/config - example.yaml` for an example configuration.

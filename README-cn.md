@@ -27,9 +27,10 @@
 - `env`: 环境变量，如API密钥。
 - `args`: 启动MCP服务的命令行参数。
 
-**重要提示**：Agent正常工作需要 `webSearch` 和 `FileSystem` MCP插件，强烈推荐使用以下插件：
-- [FileSystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)
-- [webSearch MCP](https://github.com/exa-labs/exa-mcp-server)
+**重要提示**：Agent正常工作至少需要 `webSearch` 和 `FileSystem` MCP插件，强烈推荐使用以下插件：
+- [FileSystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) : 让你的agent能够创建和编辑文件
+- [webSearch MCP](https://github.com/exa-labs/exa-mcp-server) : 让你的agent能够在互联网上获取任何你需要的东西
+- [playwright MCP](https://github.com/microsoft/playwright-mcp) : 让你的agent能够操作你的浏览器
 
 ### 配置示例
 示例配置请参考 `config/config-example.yaml`。

@@ -43,5 +43,6 @@ func NewReActAgent() (*ReActAgent, error) {
 	agent.SystemPrompt = model.GetSystemPrompt()
 	agent.MaxSteps = 100
 	agent.Memory = model.NewMemory()
+	agent.MaxObserve = 100000
 	return agent, nil
 }

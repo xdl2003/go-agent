@@ -23,3 +23,11 @@ AllMcpConfig:
       - -y
       - "@modelcontextprotocol/server-filesystem"
       - your/workspace/path
+
+  - type: stdio
+    command: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-memory"
+    env:
+      - MEMORY_FILE_PATH=YOUR_MEMORY_FILE_PATH
